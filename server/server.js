@@ -1,16 +1,8 @@
-'use strict';
+const express = require("express");
 
-const express = require('express');
-
-// Constants
-const PORT = 8000;
-const HOST = '0.0.0.0';
-
-// App
 const app = express();
-app.get('/', (req, res) => {
-  res.send('Hello nabi\n');
-});
 
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
+const movieRouter = require("./src/routers/moveRouter");
+app.use("/", movieRouter);
+
+app.listen(8000, () => console.log('Movie Search  RESTful API server started on: ' + 8000));
