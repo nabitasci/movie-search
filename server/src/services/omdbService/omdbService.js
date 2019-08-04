@@ -1,40 +1,30 @@
-var config = require('../../config/config.json')
+const axios = require('axios');
+const config = require('../../config/config.json');
+const CacheService = require('../cacheService/cacheService')
 
+const cacheService = new CacheService(); 
 class omdbService {
 
-     makeConcurrentRequests (keyword){
-        const p = new Promise((resolve, reject) => {
-    
-            let results = []
-            let count = 0
-            setTimeout(async() => {
-            results[0] = await makeRequest(config.omdb_api_url + '&s=' + keyword + '&page1')
-            count++
-            console.log('Result 1:', results[0])
-            })
-            setTimeout(async() => {
-            results[1] = await makeRequest(config.omdb_api_url +  '&s=' +keyword + '&page2')
-            count++
-            console.log('Result 2:', results[1])
-            })
-        
-            console.log('This should execute fist...')
-    
-            const intervalCount = 0
-            const int = setInterval(() => {
-            if (count === 2) {
-                console.log(`getAllDepthsAsync finished after ${intervalCount * 100} ms`)
-                resolve(allDepths)
-                clearInterval(int)
-            }
-            intervalCount++
-            if (intervalCount > 20) {
-                reject(`getAllDepthsAsync timed out after 2000 ms...`)
-                clearInterval(int)
-            }
-            }, 100)
-        })
-    }
+    makeConcurrentRequests (keyword){
+       
+       return  cacheService.get(keyword, () => axios.all([
+           axios.get(config.omdb_api_url + '&s=' + keyword + '&page=1'),
+           axios.get(config.omdb_api_url + '&s=' + keyword + '&page=2')
+         ]).then(axios.spread((response1, response2) => {
+           console.log(response1.data.Search);
+           console.log(response2.data.Search);
+
+           if(response1.data.totalResults > 10){
+               return {... response1.data.Search.concat(response2.data.Search)};
+           }else{
+               return {... response1.data.Search};
+           
+           }
+
+         })).catch(error => {
+           console.log(error);
+         }).then((result) => {return result;}));
+   }
 }
 
 module.exports = omdbService;
