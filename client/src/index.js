@@ -2,22 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
-import createHistory from 'history/createBrowserHistory';
 
-import 'normalize.css/normalize.css';
+
 
 import configureStore from './redux/configureStore';
 
 import App from './components/App';
 import './index.css';
 
-const history = createHistory();
+
 const store = configureStore(undefined, history);
 
 const render = Component => {
   ReactDOM.render(
     <Provider store={store}>
-      <ConnectedRouter history={history}>
+      <ConnectedRouter >
         <Component />
       </ConnectedRouter>
     </Provider>,

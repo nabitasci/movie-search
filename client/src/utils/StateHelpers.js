@@ -1,4 +1,4 @@
-import { API_STATUS } from './api';
+import { API_STATUS } from './Api';
 
 export const emptyStateItem = {
   status: API_STATUS.INIT,
