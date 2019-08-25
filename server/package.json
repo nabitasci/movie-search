@@ -19,6 +19,6 @@
     "url": "git://github.com/nabitasci/movie-search.git"
   },
   "devDependencies": {
-    "nodemon": "^1.19.0"
+    "nodemon": "^1.19.1"
   }
 }
