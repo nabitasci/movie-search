@@ -1,0 +1,65 @@
+import React, { Component } from "react";
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import searchMovie, { request } from '../../redux/modules/searchMovie';
+import { emptyStateItem, isFetched, isLoading, isFailed } from '../../util/stateHelpers';
+import Loading from '../../component/shared/Loading';
+import Failed from '../../component/shared/Failed';
+
+import './SearchBar.scss';
+
+class SearchBar extends Component {
+
+  constructor(props){
+    super(props);
+
+    this.state = {
+      searchMovie: {},
+    } 
+  }
+
+
+  triggerSearch = (value) => {
+    this.props.dispatch(request(value));
+   
+  }
+
+  handleSearchKeyword(value) {
+    clearTimeout(this.timer);
+
+    if(value.length > 3 && value !== ''){
+      this.timer = setTimeout(() => { this.triggerSearch(value) }, 2000);
+    }
+  }
+
+  render() {
+    if (isLoading(searchMovie)) {
+      return <Loading />;
+    }
+
+    if (isFailed(searchMovie)) {
+      return <Failed />;
+    }
+    return (
+      <div>
+        <form>
+          <input 
+          type="search" 
+          placeholder="Search..."  
+          onChange={e => this.handleSearchKeyword(e.target.value)}
+            />
+        </form>
+      </div>
+    );
+  }
+}
+
+SearchBar.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+  searchMovie: state.searchMovie,
+});
+
+export default connect(mapStateToProps)(SearchBar);

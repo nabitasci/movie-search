@@ -1,13 +1,10 @@
-import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
+import { combineReducers } from "redux";
+import { connectRouter } from 'connected-react-router';
+import searchMovie from './searchMovie';
 
-import general from './general';
-import topic from './topic';
-import author from './author';
-
-export default combineReducers({
-  router: routerReducer,
-  general,
-  topic,
-  author,
+export default (history) => combineReducers({
+    router: connectRouter(history),
+    searchMovie,
 });
+
+

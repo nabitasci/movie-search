@@ -1,19 +1,17 @@
 import React from 'react';
 
-
-import './Home.css';
+import SearchBar from '../component/SearchBar';
+import MovieList from '../component/MovieList'
 
 const Home = () => (
-  <div >
-    <div>
-      <h1>ekşiwords</h1>
-      <p className="u-gap-bottom">
-        ekşiwords <strong>2017</strong> yılı içerisinde ekşisözlük'de yazılmış
-        başlık ve entry'lerde kullanılan kelimelerin istatistiklerini çıkaran
-        bir çalışmadır.
-      </p>
+  <div className="Home">
 
-    </div>
+        <div >
+            <SearchBar />
+        </div>
+        <div>
+            <MovieList />
+        </div>
   </div>
 );
 

@@ -1,119 +1,17 @@
-
 body {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-  }
-  
-
-  html {
-    background-color: #eeba30;
- }
-  form {
-    display: block;
-    left: 50%;
-    position: absolute;
-    top: 10%;
- }
-  form input[type="search"] {
-    border: solid 3px #fff;
-    box-sizing: border-box;
-    font-size: 2em;
-    height: 2em;
-    margin-left: -15vw;
-    outline: solid #232323 0;
-    padding: 0.5em;
-    transition: all 0.5s ease-in;
-    width: 30vw;
-    z-index: 1;
- }
-  form input[type="search"]:focus {
-    border: solid 3px #232323;
-    outline: solid #232323 2000px;
-    outline-color: transparent;
- }
-  form input[type="search"]:hover {
-    box-shadow: 1px 2px 40px 2px rgba(170, 170, 170, 0.9);
- }
-  body {
-    width: 94%;
-    margin: auto;
-    font-family: "Helvetica", Sans-serif;
- }
-  .gallery {
-    margin-top: 5%;
-    width: 100%;
-    display: flex;
-    flex-flow: row wrap;
- }
-  .gallery__item {
-    background-color: #232323;
-    box-sizing: border-box;
-    width: 100%;
-    padding: 1rem;
-    margin: 1rem;
-    transition: all 0.3s ease-in;
- }
-  .gallery__item:hover {
-    box-shadow: 1px 2px 40px 2px rgba(170, 170, 170, 0.9);
- }
-  .gallery__image-caption {
-    margin-top: 1rem;
-    color: white;
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 25px;
-    font-weight: 80;
-    letter-spacing: -0.3px;
-    line-height: 1;
-    text-shadow: #ededed 0.03px 0.02px 0;
-    position: relative;
- }
-  .gallery__image {
-    width: 100%;
-    display: block;
- }
-  @media only screen and (min-width: 33.75em) {
-    .gallery__item {
-      flex-basis: calc(50% - 2rem);
-   }
- }
-  @media only screen and (min-width: 48em) {
-    .gallery__item {
-      flex-basis: calc((100% / 2) - 2rem);
-   }
- }
-  @media only screen and (min-width: 60em) {
-    .gallery__item {
-      flex-basis: calc((100% / 3) - 2rem);
-   }
- }
- 
- .App {
-  text-align: center;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+html {
+  background-color: #eeba30;
 }

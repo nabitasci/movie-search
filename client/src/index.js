@@ -1,36 +1,37 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { ConnectedRouter } from "connected-react-router";
 
+import configureStore, { history } from "./redux/configureStore";
 
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
 
-import configureStore from './redux/configureStore';
-
-import App from './components/App';
-import './index.css';
-
-
-const store = configureStore(undefined, history);
-
+const store = configureStore(undefined);
 const render = Component => {
   ReactDOM.render(
     <Provider store={store}>
-      <ConnectedRouter >
+      <ConnectedRouter history={history}>
         <Component />
       </ConnectedRouter>
     </Provider>,
-    document.getElementById('root'),
+    document.getElementById("root")
   );
 };
 
-/* istanbul ignore if */
-if (process.env.NODE_ENV === 'development' && module.hot) {
-  module.hot.accept('./components/App', () => {
+if (process.env.NODE_ENV === "development" && module.hot) {
+  module.hot.accept("./App", () => {
     // eslint-disable-next-line
-    const NextApp = require('./components/App').default;
+    const NextApp = require("./App").default;
     render(NextApp);
   });
 }
 
 render(App);
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
