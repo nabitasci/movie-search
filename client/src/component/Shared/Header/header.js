@@ -6,7 +6,7 @@ class Header extends Component {
     super(props);
 
     this.state = {
-      defaultHeader: true
+      defaultHeader: false
     };
   }
 

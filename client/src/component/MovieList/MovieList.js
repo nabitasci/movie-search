@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import searchMovie, { request } from '../../redux/modules/searchMovie';
 import { emptyStateItem, isFetched, isLoading, isFailed } from '../../util/stateHelpers';
-import Loading from '../../component/shared/Loading';
-import Failed from '../../component/shared/Failed';
+import Loading from '../../component/Shared/Loading';
+import Failed from '../../component/Shared/Failed';
 
 import './MovieList.css';
 
@@ -23,6 +23,10 @@ class MovieList extends Component {
  
     if (isLoading(searchMovie)) {
       return <Loading />;
+    }
+    
+    if (isFailed(searchMovie)) {
+      return <Failed />;
     }
 
     if (isFetched(searchMovie)) {

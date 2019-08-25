@@ -4,7 +4,7 @@ import './Failed.css';
 
 const Loading = () => (
   <div className="Failed">
-    <h3>bir hata meydana geldi :(</h3>
+    <h3>Error :(</h3>
   </div>
 );
 

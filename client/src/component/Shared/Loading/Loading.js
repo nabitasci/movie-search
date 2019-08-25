@@ -1,13 +1,13 @@
 import React from 'react';
 
-import image from '../../img/loading.svg';
+import image from '../../../img/loading.svg';
 
 import './Loading.css';
 
 const Loading = () => (
   <div className="Loading">
-    <img src={image} alt="yükleniyor" />
-    <h3>yükleniyor...</h3>
+    <img src={image} alt="loading"/>
+    <h3>Loading...</h3>
   </div>
 );
 

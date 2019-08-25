@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import searchMovie, { request } from '../../redux/modules/searchMovie';
-import { emptyStateItem, isFetched, isLoading, isFailed } from '../../util/stateHelpers';
-import Loading from '../../component/shared/Loading';
-import Failed from '../../component/shared/Failed';
+import {isLoading, isFailed } from '../../util/stateHelpers';
+import Loading from '../Shared/Loading/Loading.js';
+import Failed from '../Shared/Failed/Failed.js';
 
 import './SearchBar.scss';
 
@@ -42,13 +42,18 @@ class SearchBar extends Component {
     }
     return (
       <div>
-        <form>
+        <div className="searchForm" >
           <input 
           type="search" 
           placeholder="Search..."  
           onChange={e => this.handleSearchKeyword(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') {
+              this.triggerSearch(e.target.value)
+            }
+          }}
             />
-        </form>
+        </div>
       </div>
     );
   }
