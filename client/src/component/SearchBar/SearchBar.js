@@ -27,8 +27,8 @@ class SearchBar extends Component {
   handleSearchKeyword(value) {
     clearTimeout(this.timer);
 
-    if(value.length > 3 && value !== ''){
-      this.timer = setTimeout(() => { this.triggerSearch(value) }, 2000);
+    if(value.length >= 3 && value !== ''){
+      this.timer = setTimeout(() => { this.triggerSearch(value) }, 300);
     }
   }
 

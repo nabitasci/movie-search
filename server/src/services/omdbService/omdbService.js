@@ -2,10 +2,10 @@ const axios = require('axios');
 const config = require('../../config/config.json');
 const CacheService = require('../cacheService/cacheService')
 
-const cacheService = new CacheService(); 
+const cacheService = new CacheService(30); 
 class omdbService {
 
-    makeConcurrentRequests (keyword){
+    getMovieList (keyword){
        
        return  cacheService.get(keyword, () => axios.all([
            axios.get(config.omdb_api_url + '&s=' + keyword + '&page=1'),
@@ -24,6 +24,11 @@ class omdbService {
          })).catch(error => {
            console.log(error);
          }).then((result) => {return result;}));
+   }
+
+   clearCache (){
+    return  cacheService.flush()
+    
    }
 }
 

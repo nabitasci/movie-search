@@ -13,7 +13,6 @@ class Cache {
     }
 
     return storeFunction().then((result) => {
-        console.log('===================',result);
       this.cache.set(key, result);
       return result;
     });
