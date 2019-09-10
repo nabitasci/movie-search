@@ -1,28 +1,30 @@
-import api, { API_STATUS } from '../../util/api';
+import api, { API_STATUS } from "../../util/api";
 
 // Actions
-const REQUEST = 'movie/REQUEST';
-const SUCCESS = 'movie/SUCCESS';
-const FAIL = 'movie/FAIL';
+const REQUEST = "movie/REQUEST";
+const SUCCESS = "movie/SUCCESS";
+const FAIL = "movie/FAIL";
 
 // Action Creators
 export const success = (movie, data) => ({
   type: SUCCESS,
   movie,
-  data,
+  data
 });
 
 export const fail = (movie, error) => ({
   type: FAIL,
   movie,
-  error,
+  error
 });
 
 export const request = movie => async dispatch => {
   dispatch({ type: REQUEST, movie });
 
   try {
-    const { data, ok, problem } = await api.get(`/search?keyword=${movie.toLowerCase()}`);
+    const { data, ok, problem } = await api.get(
+      `/search?keyword=${movie.toLowerCase()}`
+    );
 
     if (!ok) {
       dispatch(fail(problem));
@@ -35,37 +37,42 @@ export const request = movie => async dispatch => {
   }
 };
 
+export const initialState = {
+  movieList: {
+    data: {}
+  },
+  status: API_STATUS.INIT
+};
+
 // Reducer
-export default (state = {}, { type, data, error }) => {
+export default (state = initialState, { type, data, error }) => {
   switch (type) {
     case REQUEST:
       return {
         ...state,
-        ['movieList']: {
+        movieList: {
           data: {},
           error: null,
         },
-        status: API_STATUS.LOADING,
+        status: API_STATUS.LOADING
       };
     case SUCCESS:
       return {
         ...state,
-        ['movieList']: {
-          
+        movieList: {
           data,
           error: null,
         },
-        status: API_STATUS.FETCHED,
+        status: API_STATUS.FETCHED
       };
     case FAIL:
       return {
         ...state,
-        ['movieList']: {
-          
+        movieList: {
           data: {},
-          error,
+          error
         },
-        status: API_STATUS.FAILED,
+        status: API_STATUS.FAILED
       };
     default:
       return state;
