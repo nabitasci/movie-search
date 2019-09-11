@@ -6,6 +6,7 @@ Movie search project is simple web site which is uses OMDB RestAPI's.
 ### How to UP 
 - `cd server` -> `npm install`(./movie-search/server)
 - `cp .env.dev.example .env` (./movie-search)
+- `cd client` -> `cp .env.dev.example .env` (./movie-search)
 - `docker-compose up -d --build`
 
 ## API 
