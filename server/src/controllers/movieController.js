@@ -12,6 +12,7 @@ exports.search_movies = async function(req, res){
       return res.status(200).send(data);
    }
    catch (error) {
+      console.log(error);
       return res.status(403).send(error);
    }
 
