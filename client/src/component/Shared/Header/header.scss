@@ -12,27 +12,11 @@ body {
 .header {
   position: fixed;
   width: 100%;
-  height: 250px;
+  height: 200px;
   font-weight: bold;
   text-align: center;
   background: gold;
   transition: .3s;
-  // header shrinks when .small added to .header
-  &.small {
-    height: 70px;
-    box-shadow: 0 0 5px rgba(black, .2);
-    // when header.small also change page offset
-    & ~ .offset {
-      padding-top: 140px;
-    }
-    // when header.small change logo pad & font size
-    .header_logo {
-      padding-top: 20px;
-      font-size: 20px;
-      text-shadow: none;
-      font-size: 0;
-    }
-  }
 }
 
 .header_logo {

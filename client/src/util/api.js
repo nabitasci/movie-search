@@ -1,7 +1,7 @@
 import { create } from 'apisauce';
 
 const api = create({
-  baseURL: 'http://localhost:8000/api', // TODO: Get from ENV
+  baseURL:process.env.REACT_APP_API_URL,
 });
 
 export const API_STATUS = {

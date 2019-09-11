@@ -2,7 +2,7 @@
     width: 100%;
     display: flex;
     flex-flow: row wrap;
-    padding-top: 250px;
+    padding-top: 220px;
  }
   .gallery__item {
     background-color: #232323;

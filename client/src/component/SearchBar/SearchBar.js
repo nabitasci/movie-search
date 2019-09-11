@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { request } from '../../redux/modules/searchMovie';
+import { debounce } from 'lodash';
 
 
 import './SearchBar.scss';
@@ -16,18 +17,11 @@ class SearchBar extends Component {
     } 
   }
 
-  triggerSearch = (value) => {
-    this.props.dispatch(request(value));
-   
-  }
-
-  handleSearchKeyword(value) {
-    clearTimeout(this.timer);
-
+  triggerSearch = debounce((value) => {
     if(value.length >= 3 && value !== ''){
-      this.timer = setTimeout(() => { this.triggerSearch(value) }, 300);
+      this.props.dispatch(request(value));
     }
-  }
+  }, 300);
 
   render() {
 
@@ -37,7 +31,7 @@ class SearchBar extends Component {
           <input 
           type="search" 
           placeholder="Search..."  
-          onChange={e => this.handleSearchKeyword(e.target.value)}
+          onChange={e => this.triggerSearch(e.target.value)}
           onKeyPress={(e) => {
             if (e.key === 'Enter') {
               this.triggerSearch(e.target.value)
