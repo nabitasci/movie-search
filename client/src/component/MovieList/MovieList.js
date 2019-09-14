@@ -30,7 +30,7 @@ class MovieList extends Component {
     }
     // Failed component updated
     if (this.isFailed(searchMovie)) {
-      return <Failed error={"Please do not use spacial char."} />;
+      return <Failed error={"Error"} />;
     }
     // Empty state control if state is not initial state
     if (this.isFetched(searchMovie) && !this.isInit(searchMovie)) {
