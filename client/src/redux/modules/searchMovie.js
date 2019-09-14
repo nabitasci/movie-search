@@ -21,19 +21,31 @@ export const fail = (movie, error) => ({
 export const request = movie => async dispatch => {
   dispatch({ type: REQUEST, movie });
 
-  try {
-    const { data, ok, problem } = await api.get(
-      `/search?keyword=${movie.toLowerCase()}`
-    );
+  const cachedMovies = window["__data"];
+  if (!cachedMovies || !cachedMovies.hasOwnProperty(movie)) {
+    try {
+      const { data, ok, problem } = await api.get(
+        `/search?keyword=${movie.toLowerCase()}`
+      );
 
-    if (!ok) {
-      dispatch(fail(problem));
-      return;
+      if (!ok) {
+        dispatch(fail(problem));
+        return;
+      }
+      // Store to cache
+      window['__data'] = {... cachedMovies,
+       [movie.toLowerCase()] : {
+        data
+      }
+    };
+
+      dispatch(success(movie, data));
+    } catch (err) {
+      dispatch(fail(movie, err.message));
     }
-
-    dispatch(success(movie, data));
-  } catch (err) {
-    dispatch(fail(movie, err.message));
+  } else {
+     console.log('NABIIIII', cachedMovies[movie], cachedMovies[movie].data)
+    dispatch(success(movie, cachedMovies[movie].data));
   }
 };
 
@@ -52,7 +64,7 @@ export default (state = initialState, { type, data, error }) => {
         ...state,
         movieList: {
           data: {},
-          error: null,
+          error: null
         },
         status: API_STATUS.LOADING
       };
@@ -61,7 +73,7 @@ export default (state = initialState, { type, data, error }) => {
         ...state,
         movieList: {
           data,
-          error: null,
+          error: null
         },
         status: API_STATUS.FETCHED
       };
