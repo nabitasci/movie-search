@@ -1,14 +1,14 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { createLogger } from "redux-logger";
-import { createBrowserHistory } from 'history';
-import { routerMiddleware } from 'connected-react-router'
+import { createBrowserHistory } from "history";
+import { routerMiddleware } from "connected-react-router";
 
 import rootReducer from "./modules";
 
-export const history = createBrowserHistory()
+export const history = createBrowserHistory();
 
-const configureStore = (prelodedState) => {
+const configureStore = prelodedState => {
   const middlewares = [thunk, routerMiddleware(history)];
 
   /* istanbul ignore if */
@@ -32,7 +32,11 @@ const configureStore = (prelodedState) => {
     /* eslint-enable */
   }
 
-  const store = createStore(rootReducer(history), prelodedState, compose(...composed));
+  const store = createStore(
+    rootReducer(history),
+    prelodedState,
+    compose(...composed)
+  );
 
   /* istanbul ignore if */
   if (process.env.NODE_ENV === "development" && module.hot) {

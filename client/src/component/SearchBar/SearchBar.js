@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { request } from "../../redux/modules/searchMovie";
 import { debounce } from "lodash";
 
-import "./SearchBar.scss";
+import SearchBarView from "./SearchBarView";
 
 class SearchBar extends Component {
   constructor(props) {
@@ -15,34 +15,17 @@ class SearchBar extends Component {
     };
   }
 
-  triggerSearch = debounce(value => {
-    if (value.length >= 3 && value !== "") {
-      this.props.dispatch(request(value));
-    }
-  }, 300);
+  search = value => {
+    this.props.dispatch(request(value));
+  };
 
   render() {
-    return (
-      <div>
-        <div className="searchForm">
-          <input
-            type="search"
-            placeholder="Search..."
-            onChange={e => this.triggerSearch(e.target.value)}
-            onKeyPress={e => {
-              if (e.key === "Enter") {
-                this.triggerSearch(e.target.value);
-              }
-            }}
-          />
-        </div>
-      </div>
-    );
+    return <SearchBarView  handleSearch={this.search}/>;
   }
 }
 
 SearchBar.propTypes = {
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

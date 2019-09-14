@@ -5,8 +5,8 @@ import searchMovie from "../../redux/modules/searchMovie";
 import Loading from "../../component/Shared/Loading";
 import Failed from "../../component/Shared/Failed";
 import { API_STATUS } from "../../util/api";
+import MovieListView from "./MovieListView";
 
-import "./MovieList.css";
 
 class MovieList extends Component {
   constructor(props) {
@@ -28,35 +28,20 @@ class MovieList extends Component {
     if (this.isLoading(searchMovie)) {
       return <Loading />;
     }
-
     // Failed component updated
     if (this.isFailed(searchMovie)) {
       return <Failed error={"Please do not use spacial char."} />;
     }
-
     // Empty state control if state is not initial state
     if (this.isFetched(searchMovie) && !this.isInit(searchMovie)) {
-      return (
-        <div>
-          <section className="gallery">
-            {Object.values(searchMovie.movieList.data).map(item => (
-              <figure key={item.imdbID} className="gallery__item">
-                <img src={item.Poster} />
-                <figcaption className="gallery__image-caption">
-                  {item.Title}
-                </figcaption>
-              </figure>
-            ))}
-          </section>
-        </div>
-      );
+      return <MovieListView searchMovie={searchMovie} />;
     }
     return true;
   }
 }
 
 MovieList.propTypes = {
-  dispatch: PropTypes.func.isRequired
+  searchMovie: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

@@ -45,7 +45,6 @@ export const request = movie => async dispatch => {
       dispatch(fail(movie, err.message));
     }
   } else {
-    console.log("NABIIIII", cachedMovies[movie], cachedMovies[movie].data);
     dispatch(success(movie, cachedMovies[movie].data));
   }
 };
