@@ -9,7 +9,7 @@ class MovieListView extends Component {
     return (
       <div>
         <section className="gallery">
-          {searchMovie.movieList.data && Object.values(searchMovie.movieList.data).map(item => (
+          {Object.values(searchMovie.movieList.data).map(item => (
             <figure key={item.imdbID} className="gallery__item">
               <img src={item.Poster} />
               <figcaption className="gallery__image-caption">

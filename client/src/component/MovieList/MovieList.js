@@ -7,7 +7,6 @@ import Failed from "../../component/Shared/Failed";
 import { API_STATUS } from "../../util/api";
 import MovieListView from "./MovieListView";
 
-
 class MovieList extends Component {
   constructor(props) {
     super(props);
@@ -32,8 +31,8 @@ class MovieList extends Component {
     if (this.isFailed(searchMovie)) {
       return <Failed error={"Error"} />;
     }
-    // Empty state control if state is not initial state
-    if (this.isFetched(searchMovie) && !this.isInit(searchMovie) && ! searchMovie.movieList.data) {
+    // If state fetched mean that data is not null
+    if (this.isFetched(searchMovie)) {
       return <MovieListView searchMovie={searchMovie} />;
     }
     return true;
@@ -41,7 +40,7 @@ class MovieList extends Component {
 }
 
 MovieList.propTypes = {
-  searchMovie: PropTypes.func.isRequired
+  searchMovie: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({

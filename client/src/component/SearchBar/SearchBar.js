@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { request } from "../../redux/modules/searchMovie";
-import { debounce } from "lodash";
 
 import SearchBarView from "./SearchBarView";
 

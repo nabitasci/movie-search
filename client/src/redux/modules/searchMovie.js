@@ -75,7 +75,7 @@ export default (state = initialState, { type, data, error }) => {
           data,
           error: null
         },
-        status: API_STATUS.FETCHED
+        status: data ? API_STATUS.FETCHED : API_STATUS.INIT 
       };
     case FAIL:
       return {
