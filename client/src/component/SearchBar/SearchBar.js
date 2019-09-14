@@ -20,12 +20,12 @@ class SearchBar extends Component {
   };
 
   render() {
-    return <SearchBarView  handleSearch={this.search}/>;
+    return <SearchBarView handleSearch={this.search} />;
   }
 }
 
 SearchBar.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
