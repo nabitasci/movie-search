@@ -8,7 +8,7 @@ router.use(function(req, res, next) {
     next();
  });
 
-router.get("/api/search?", movieController.search_movies);
-router.delete("/api/clear", movieController.clear_movie_cache);
+router.get("/api/search?", movieController.searchMovies);
+router.delete("/api/clear", movieController.clearMovieCache);
  
 module.exports = router;
