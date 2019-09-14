@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { Component } from "react";
 
-import './Failed.css';
+import image from "../../../img/failed.svg";
 
-const Loading = () => (
-  <div className="Failed">
-    <h3>Error :(</h3>
-  </div>
-);
+import "./Failed.css";
 
-export default Loading;
+class Failed extends Component {
+  render() {
+    return (
+      <div className="Failed">
+        <img src={image} alt="Failed" />
+        <h3>{this.props.error} :(</h3>
+      </div>
+    );
+  }
+}
+
+export default Failed;

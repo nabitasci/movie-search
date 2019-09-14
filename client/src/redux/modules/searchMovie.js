@@ -1,71 +1,90 @@
-import api, { API_STATUS } from '../../util/api';
+import api, { API_STATUS } from "../../util/api";
 
 // Actions
-const REQUEST = 'movie/REQUEST';
-const SUCCESS = 'movie/SUCCESS';
-const FAIL = 'movie/FAIL';
+const REQUEST = "movie/REQUEST";
+const SUCCESS = "movie/SUCCESS";
+const FAIL = "movie/FAIL";
 
 // Action Creators
 export const success = (movie, data) => ({
   type: SUCCESS,
   movie,
-  data,
+  data
 });
 
 export const fail = (movie, error) => ({
   type: FAIL,
   movie,
-  error,
+  error
 });
 
 export const request = movie => async dispatch => {
   dispatch({ type: REQUEST, movie });
 
-  try {
-    const { data, ok, problem } = await api.get(`/search?keyword=${movie.toLowerCase()}`);
+  const cachedMovies = window["__data"];
+  if (!cachedMovies || !cachedMovies.hasOwnProperty(movie)) {
+    try {
+      const { data, ok, problem } = await api.get(
+        `/search?keyword=${movie.toLowerCase()}`
+      );
 
-    if (!ok) {
-      dispatch(fail(problem));
-      return;
+      if (!ok) {
+        dispatch(fail(problem));
+        return;
+      }
+      // Store to cache
+      window["__data"] = {
+        ...cachedMovies,
+        [movie.toLowerCase()]: {
+          data
+        }
+      };
+
+      dispatch(success(movie, data));
+    } catch (err) {
+      dispatch(fail(movie, err.message));
     }
-
-    dispatch(success(movie, data));
-  } catch (err) {
-    dispatch(fail(movie, err.message));
+  } else {
+    dispatch(success(movie, cachedMovies[movie].data));
   }
 };
 
+export const initialState = {
+  movieList: {
+    data: {}
+  },
+  status: API_STATUS.INIT
+};
+
 // Reducer
-export default (state = {}, { type, data, error }) => {
+export default (state = initialState, { type, data, error }) => {
   switch (type) {
     case REQUEST:
       return {
         ...state,
-        ['movieList']: {
+        movieList: {
           data: {},
-          error: null,
+          error: null
         },
-        status: API_STATUS.LOADING,
+        status: API_STATUS.LOADING
       };
     case SUCCESS:
       return {
         ...state,
-        ['movieList']: {
-          
+        movieList: {
           data,
-          error: null,
+          error: null
         },
-        status: API_STATUS.FETCHED,
+        status: API_STATUS.FETCHED
       };
     case FAIL:
       return {
         ...state,
-        ['movieList']: {
-          
+        movieList: {
           data: {},
-          error,
+          error
         },
-        status: API_STATUS.FAILED,
+        status: API_STATUS.FAILED
       };
     default:
       return state;
