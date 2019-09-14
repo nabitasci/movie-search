@@ -33,7 +33,7 @@ class MovieList extends Component {
       return <Failed error={"Error"} />;
     }
     // Empty state control if state is not initial state
-    if (this.isFetched(searchMovie) && !this.isInit(searchMovie)) {
+    if (this.isFetched(searchMovie) && !this.isInit(searchMovie) && ! searchMovie.movieList.data) {
       return <MovieListView searchMovie={searchMovie} />;
     }
     return true;
