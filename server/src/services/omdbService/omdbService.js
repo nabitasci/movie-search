@@ -15,9 +15,9 @@ class omdbService {
         .then(
           axios.spread((response1, response2) => {
             if (response1.data.totalResults > 10) {
-              return { ...response1.data.Search.concat(response2.data.Search) };
+              return response1.data.Search.concat(response2.data.Search);
             } else {
-              return { ...response1.data.Search };
+              return response1.data.Search;
             }
           })
         )
