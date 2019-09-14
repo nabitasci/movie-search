@@ -17,7 +17,7 @@ class SearchBarView extends Component {
       <div>
         <div className="searchForm">
           <input
-            type="search"
+            type="custom_search"
             placeholder="Search..."
             onChange={e => this.triggerSearch(e.target.value)}
             onKeyPress={e => {
