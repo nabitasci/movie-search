@@ -31,22 +31,22 @@ class MovieList extends Component {
 
     // Failed component updated
     if (this.isFailed(searchMovie)) {
-      return <Failed error={"Please do not use spacial char."}/>;
+      return <Failed error={"Please do not use spacial char."} />;
     }
 
     // Empty state control if state is not initial state
-    if (this.isFetched(searchMovie) && ! this.isInit(searchMovie)) {
+    if (this.isFetched(searchMovie) && !this.isInit(searchMovie)) {
       return (
         <div>
           <section className="gallery">
             {Object.values(searchMovie.movieList.data).map(item => (
-                <figure key={item.imdbID} className="gallery__item">
-                  <img src={item.Poster} />
-                  <figcaption className="gallery__image-caption">
-                    {item.Title}
-                  </figcaption>
-                </figure>
-              ))}
+              <figure key={item.imdbID} className="gallery__item">
+                <img src={item.Poster} />
+                <figcaption className="gallery__image-caption">
+                  {item.Title}
+                </figcaption>
+              </figure>
+            ))}
           </section>
         </div>
       );

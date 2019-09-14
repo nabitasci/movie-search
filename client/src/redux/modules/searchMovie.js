@@ -33,18 +33,19 @@ export const request = movie => async dispatch => {
         return;
       }
       // Store to cache
-      window['__data'] = {... cachedMovies,
-       [movie.toLowerCase()] : {
-        data
-      }
-    };
+      window["__data"] = {
+        ...cachedMovies,
+        [movie.toLowerCase()]: {
+          data
+        }
+      };
 
       dispatch(success(movie, data));
     } catch (err) {
       dispatch(fail(movie, err.message));
     }
   } else {
-     console.log('NABIIIII', cachedMovies[movie], cachedMovies[movie].data)
+    console.log("NABIIIII", cachedMovies[movie], cachedMovies[movie].data);
     dispatch(success(movie, cachedMovies[movie].data));
   }
 };

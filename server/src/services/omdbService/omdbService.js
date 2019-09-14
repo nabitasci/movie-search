@@ -5,7 +5,6 @@ const CacheService = require("../cacheService/cacheService");
 const cacheService = new CacheService(30);
 
 class omdbService {
-
   getMovieList(keyword) {
     return cacheService.get(keyword, () =>
       axios
@@ -15,7 +14,6 @@ class omdbService {
         ])
         .then(
           axios.spread((response1, response2) => {
-
             if (response1.data.totalResults > 10) {
               return { ...response1.data.Search.concat(response2.data.Search) };
             } else {
@@ -23,7 +21,7 @@ class omdbService {
             }
           })
         )
-        .catch(error => { 
+        .catch(error => {
           return error;
         })
         .then(result => {
