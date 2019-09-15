@@ -13,6 +13,10 @@
      transition: all 0.5s ease-in;
      width: 30vw;
      z-index: 1;
+     @media screen and (max-width: 736px)  {
+      width: 60vw;
+      margin-left: -30vw;
+     }
      &:focus {
        border: solid 3px #232323;
        outline: solid #232323 2000px;
