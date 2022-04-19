@@ -1,12 +1,12 @@
 import React from 'react';
 
-import image from '../../../img/loading.svg';
+import SvgComponent from '../../../img/loading';
 
 import './Loading.css';
 
 const Loading = () => (
   <div className="Loading">
-    <img src={image} alt="Loading"/>
+    <SvgComponent/>
     <h3>Loading...</h3>
   </div>
 );

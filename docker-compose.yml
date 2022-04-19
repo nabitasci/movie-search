@@ -15,6 +15,7 @@ services:
     volumes:
       - ./server/src:/srv/app/server/src
       - ./server:/srv/app/server
+      - ./srv/app/server/node_modules
   client:
     container_name: client 
     build: ./client
